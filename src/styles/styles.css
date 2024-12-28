@@ -1,0 +1,102 @@
+/* General page styles */
+body {
+    font-family: Arial, sans-serif;
+    margin-left: 4.5in;  /* Set 3.5-inch margin on the left */
+    margin-right: 4.5in; /* Set 3.5-inch margin on the right */    
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Main container for the resume */
+/* Main container for the resume */
+.resume-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Header section */
+header {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+header p {
+    margin: 5px 0;
+    font-size: 1em;
+    color: #555;
+}
+
+/* Section headers (Job, Education, etc.) */
+section h2 {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Job and project listings */
+.job, .project {
+    margin-bottom: 15px;
+}
+
+.job h3, .project h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #444;
+}
+
+.job p, .project ul {
+    margin: 5px 0;
+    font-size: 1em;
+}
+
+/* List styling */
+ul {
+    padding-left: 20px;
+    list-style-type: disc;
+}
+
+li {
+    margin-bottom: 5px;
+    line-height: 1.5;
+}
+
+/* Emphasis styles */
+strong {
+    color: #222;
+}
+
+em {
+    color: #555;
+}
+
+/* Line separating sections */
+section {
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+}
+
+/* Bold specific job titles */
+.job-title.prominent-title {
+    font-weight: bold;
+}
+
+/* Adjust margin and spacing for sections */
+section h2 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
