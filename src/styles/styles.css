@@ -1,24 +1,34 @@
-/* General page styles */
+/* Global background for the entire page */
 body {
     font-family: Arial, sans-serif;
-    margin-left: 4.5in;  /* Set 3.5-inch margin on the left */
-    margin-right: 4.5in; /* Set 3.5-inch margin on the right */    
+    margin: 0 4.0in; /* Set left and right margins only */
     padding: 0;
-    background-color: #f9f9f9;
-    color: #333;
-    line-height: 1.6;
+    background: linear-gradient(rgba(255, 255, 255, .9), rgba(255, 255, 255, 0.7)), url('background-image.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    background-attachment: fixed;
 }
 
 /* Main container for the resume */
-/* Main container for the resume */
 .resume-container {
+    position: relative;
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    color: #000;
+    overflow: hidden;
+    z-index: 10;  /* Ensure the resume container is above the image */
+}
+
+/* Ensure cards inside the resume container are styled correctly */
+.resume-container .card {
+    margin: 20px 0; /* Custom margin for cards inside .resume-container */
+    z-index: 15;  /* Cards should appear above other elements */
 }
 
 /* Header section */
@@ -99,4 +109,43 @@ section {
 section h2 {
     margin-top: 5px;
     margin-bottom: 5px;
+}
+
+/* Footer styling */
+.footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: #888;
+}
+
+.footer a {
+    color: #C04000;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+/* Image credit below the card images */
+.image-credit {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    font-size: 0.8em;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 2px 5px;
+    border-radius: 5px;
+}
+
+.image-credit a {
+    color: #f4a261;
+    text-decoration: none;
+}
+
+.image-credit a:hover {
+    text-decoration: underline;
 }

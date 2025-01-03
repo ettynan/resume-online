@@ -1,0 +1,16 @@
+.visitor-counter {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333; /* Set your preferred color here */
+  }
+  
+  .visitor-counter h3 {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .visitor-counter p {
+    font-size: 1.2em;
+  }
+  

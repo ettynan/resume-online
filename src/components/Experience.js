@@ -9,9 +9,11 @@ const Experience = () => {
         <p className="job-duration">07/2023 - 12/2023</p>
         <p className="company-name">TopHat Essentials, LLC</p>
         <ul>
-          <li>Opened and operated an online drop-shipping store focusing on safety apparel.</li>
-          <li>Conducted market research to identify demand for safety apparel and small equipment.</li>
-          <li>Managed e-commerce platform and provided exceptional customer service.</li>
+          <li>Founded and managed an online safety apparel business, providing product recommendations and solutions to meet client needs.</li>
+          <li>Conducted market analysis and customer research to identify emerging trends, providing actionable insights to improve product offerings and increase sales.</li>
+          <li>Developed and implemented business strategies that optimized operational efficiency, increasing order fulfillment by 15%.</li>
+          <li>Handled end-to-end operations, including product selection, inventory management, and order fulfillment, ensuring seamless customer experiences.</li>
+          <li>Built and maintained a digital presence, utilizing e-commerce platforms and digital marketing strategies to drive brand awareness.</li>
         </ul>
       </div>
       <div className="job">

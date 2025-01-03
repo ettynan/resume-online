@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import './styles/Card.css'; 
+import './styles/VisitorCounter.css'
 import './styles/styles.css';  // Importing the external CSS file
 import App from './App';
 import reportWebVitals from './reportWebVitals';
