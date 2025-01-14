@@ -4,6 +4,19 @@ import Card from './Card'; // Importing the Card component for displaying each p
 // Array holding data for each project
 // Each project includes a title, content, and the front/back images
 const projectsData = [
+  {
+    title: 'Cloud Resume Challenge (In Progress)', // Title of the project
+    content: (
+      <ul>
+        {/* List of details describing the project */}
+        <li>Built responsive resume webpage with React, HTML, & CSS, with plans for AWS hosting.</li>
+        <li>Progressing toward cloud hosting using AWS services, including S3 and DynamoDB for
+        visitor tracking, while integrating CI/CD for automated deployment.</li>
+      </ul>
+    ),
+    frontImage: 'front-gear.jpg', // Add the front image here
+    backImage: 'back-gear.jpg',   // Add the back image here
+  },
   { 
     title: 'Kubernetes Cluster Setup', // Title of the project
     content: (

@@ -1,151 +1,174 @@
-/* Global background for the entire page */
+/* General Styles */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0 4.0in; /* Set left and right margins only */
-    padding: 0;
-    background: linear-gradient(rgba(255, 255, 255, .9), rgba(255, 255, 255, 0.7)), url('background-image.jpg');
-    background-size: cover;
-    background-position: center;
-    height: 100%;
-    background-attachment: fixed;
+  font-family: Arial, sans-serif;
+  margin: 0 4.0in;
+  padding: 0;
+  background: linear-gradient(rgba(255, 255, 255, .9), rgba(255, 255, 255, 0.7)), url('background-image.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  background-attachment: fixed;
 }
 
-/* Main container for the resume */
 .resume-container {
-    position: relative;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    color: #000;
-    overflow: hidden;
-    z-index: 10;  /* Ensure the resume container is above the image */
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  color: #000;
+  overflow: hidden;
+  z-index: 10;
 }
 
-/* Ensure cards inside the resume container are styled correctly */
-.resume-container .card {
-    margin: 20px 0; /* Custom margin for cards inside .resume-container */
-    z-index: 15;  /* Cards should appear above other elements */
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 50px;
 }
 
-/* Header section */
-header {
-    text-align: center;
-    margin-bottom: 15px;
+.card {
+  width: 550px;
+  height: 350px;
+  perspective: 1000px;
+  margin-bottom: 2in;
+  flex-shrink: 0;
+  position: relative; /* Ensure position is relative for inner elements */
 }
 
-header h1 {
-    margin: 0;
-    font-size: 2em;
-    font-weight: bold;
+.card:nth-child(odd) {
+  margin-top: -45px;
 }
 
-header p {
-    margin: 5px 0;
-    font-size: 1em;
-    color: #555;
+.card:nth-child(even) {
+  margin-top: 450px;
 }
 
-/* Section headers (Job, Education, etc.) */
-section h2 {
-    font-size: 1.5em;
-    color: #333;
-    margin-bottom: 10px;
+/* 3D card flipping effect */
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease;
 }
 
-/* Job and project listings */
-.job, .project {
-    margin-bottom: 15px;
+.card:hover .card-inner {
+  transform: rotateY(180deg);
 }
 
-.job h3, .project h3 {
-    margin: 0 0 5px 0;
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #444;
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  padding: 20px;
+  background-size: cover;
+  background-position: center;
 }
 
-.job p, .project ul {
-    margin: 5px 0;
-    font-size: 1em;
+/* Front of the Card */
+.card .card-front {
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  text-align: center;
+  color: #333;
 }
 
-/* List styling */
-ul {
-    padding-left: 20px;
-    list-style-type: disc;
+.card .card-front h3 {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: black;
+  background-color: white;
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Back of the Card */
+.card .card-back {
+  transform: rotateY(180deg);
+  background-color: white;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 0;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: center; /* Centering the box */
+  font-family: 'Georgia', serif; /* Steampunk-inspired font */
+}
+
+/* Add extra left padding to the text content itself */
+.card .card-back .content-box p,
+.card .card-back .content-box ul {
+  padding-left: 30px; /* Left padding added here */
+  margin: 0; /* Remove any default margin */
+}
+
+/* Content Box - Only takes as much width as necessary for the words */
+.card .card-back .content-box {
+  background-color: white;
+  padding: 20px;  /* Adjust padding for spacing around text */
+  border-radius: 8px;  /* Optional: Rounded corners for the box */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /* Optional: Shadow for effect */
+  margin: 0;  /* Remove any margin */
+  display: inline-block;  /* Makes the box fit the content width */
+  width: auto;  /* Automatically adjusts width based on content */
+  max-width: 100%;  /* Ensure it doesn't overflow the card */
+  text-align: left;  /* Align text to the left */
+}
+
+/* The box around the entire card content */
+.card .card-back h3,
+.card .card-back p,
+.card .card-back ul {
+  color: black;
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Remove bullet points and increase font size for list items */
+.card .card-back ul {
+  list-style-type: none; /* Remove bullet points */
+  padding-left: 0;
+  margin-top: 10px;
+  font-size: 1.2em; /* Increase font size */
+}
+
+.card .card-back li {
+  margin-bottom: 15px; /* Increase spacing between items */
+  line-height: 1.8;
+  color: black;
+  background-color: transparent; /* Ensure no background around list items */
+  padding: 0; /* Remove padding around list items */
+  border: none; /* Remove borders around list items */
+}
+
+/* Additional styles for lists and font size */
+ul, ol {
+  padding-left: 0;
 }
 
 li {
-    margin-bottom: 5px;
-    line-height: 1.5;
-}
-
-/* Emphasis styles */
-strong {
-    color: #222;
-}
-
-em {
-    color: #555;
-}
-
-/* Line separating sections */
-section {
-    border-bottom: 2px solid #ddd;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-}
-
-/* Bold specific job titles */
-.job-title.prominent-title {
-    font-weight: bold;
-}
-
-/* Adjust margin and spacing for sections */
-section h2 {
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-/* Footer styling */
-.footer {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 0.9em;
-    color: #888;
-}
-
-.footer a {
-    color: #C04000;
-    text-decoration: none;
-}
-
-.footer a:hover {
-    text-decoration: underline;
-}
-
-/* Image credit below the card images */
-.image-credit {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: #fff;
-    font-size: 0.8em;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 2px 5px;
-    border-radius: 5px;
-}
-
-.image-credit a {
-    color: #f4a261;
-    text-decoration: none;
-}
-
-.image-credit a:hover {
-    text-decoration: underline;
+  margin-bottom: 10px;
+  line-height: 1.8;
+  font-size: 1.2em; /* Increase font size for better readability */
 }
