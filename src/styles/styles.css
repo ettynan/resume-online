@@ -1,7 +1,7 @@
 /* General Styles */
 body {
   font-family: Arial, sans-serif;
-  margin: 0 4.0in;
+  margin: 0 1.0in;
   padding: 0;
   background: linear-gradient(rgba(255, 255, 255, .9), rgba(255, 255, 255, 0.7)), url('background-image.jpg');
   background-size: cover;
@@ -10,30 +10,23 @@ body {
   background-attachment: fixed;
 }
 
-.resume-container {
-  position: relative;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-  color: #000;
-  overflow: hidden;
-  z-index: 10;
-}
-
 .cards-container {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start;
-  margin-top: 50px;
+  flex-direction: column;
+  align-items: center; /* Center the cards horizontally */
+  position: relative;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px; /* You can adjust the max-width */
+  margin: 0 auto;
+  padding: 20px;
 }
 
 .card {
-  width: 550px;
+  position: relative;
+  width: 850px;
   height: 350px;
   perspective: 1000px;
   margin-bottom: 2in;
@@ -41,12 +34,31 @@ body {
   position: relative; /* Ensure position is relative for inner elements */
 }
 
-.card:nth-child(odd) {
-  margin-top: -45px;
+/* Animations for cards */
+.card[data-aos='zoom-in'] {
+  opacity: 1;
+  transform: translateY(0) scale(1); /* Bring into view */
+}
+
+.card[data-aos='zoom-in-left'] {
+  opacity: 1;
+  transform: translateY(-20px) translateX(-50px) scale(1);
+}
+
+.card[data-aos='zoom-in-right'] {
+  opacity: 1;
+  transform: translateY(-20px) translateX(50px) scale(1);
+}
+
+/* Offset each card individually */ 
+.card:nth-child(2) {
+  position: relative;
+  left: 100%; /* Keeps the first card to the left */
 }
 
 .card:nth-child(even) {
-  margin-top: 450px;
+  position: relative;
+  left: 10%; /* Keeps the first card to the left */
 }
 
 /* 3D card flipping effect */
@@ -154,11 +166,10 @@ body {
 }
 
 .card .card-back li {
-  margin-bottom: 15px; /* Increase spacing between items */
-  line-height: 1.8;
+  margin-bottom: 10px; /* Increase spacing between items */
+  line-height: 1.2;
   color: black;
   background-color: transparent; /* Ensure no background around list items */
-  padding: 0; /* Remove padding around list items */
   border: none; /* Remove borders around list items */
 }
 
@@ -168,7 +179,157 @@ ul, ol {
 }
 
 li {
+  line-height: 1.2;
+  font-size: 1em; /* Increase font size for better readability */
+}
+
+p {
+  line-height: 1.5;
+  font-size: 1.5em; /* Increase font size for better readability */
+}
+
+h2 {
+  line-height: 1.5;
+  font-size: 2em; /* Increase font size for better readability */
+  font-family: 'Georgia', serif; /* Steampunk-inspired font */
+}
+
+/* Scroll-triggered animation */
+[data-aos] {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+[data-aos].aos-animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Projects cards */
+
+.cards-container2 {
+  display: grid; /* Make it a grid */
+  grid-template-columns: repeat(2, 1fr); /* Two equal-width columns */
+  gap: 70px; /* Space between cards */
+  padding: 20px; /* Padding around the grid */
+}
+
+.cards-container2 .card {
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 450px; /* Adjust the max width as per your needs */
+  margin: 0 auto; /* Center the card */
+}
+
+.cards-container2 .card:hover {
+  transform: scale(1.05); /* Slight zoom effect on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Larger shadow on hover */
+}
+
+/* For smaller cards inside cards-container2 */
+.cards-container2 .card .card-title {
+  font-size: 20px; /* Adjust the font size to your desired value */
+  font-family: 'Georgia', serif; /* Steampunk-inspired font */
+}
+
+.card-front-image, .card-back-image {
+  width: 100%;  /* Make the images take up the full width of the card */
+  height: auto; /* Maintain the aspect ratio */
+  object-fit: cover; /* Ensure the image covers the area without distortion */
+}
+
+.card-inner {
+  position: relative;
+  /* Add other styles for card flipping effect if needed */
+}
+
+/* Education cards */
+
+.education-cards-container {
+  display: grid; /* Make it a grid */
+  grid-template-columns: repeat(2, 1fr); /* Two equal-width columns */
+  gap: 70px; /* Space between cards */
+  padding: 20px; /* Padding around the grid */
+}
+
+.education-cards-container .card {
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 550px; /* Adjust the max width as per your needs */
+  margin: 0 auto; /* Center the card */
+}
+
+.education-cards-container .card:hover {
+  transform: scale(1.05); /* Slight zoom effect on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Larger shadow on hover */
+}
+
+/* For smaller cards inside cards-container2 */
+.education-cards-container .card .card-title {
+  font-size: 20px; /* Adjust the font size to your desired value */
+  font-family: 'Georgia', serif; /* Steampunk-inspired font */
+}
+
+.card-front-image, .card-back-image {
+  width: 100%;  /* Make the images take up the full width of the card */
+  height: auto; /* Maintain the aspect ratio */
+  object-fit: cover; /* Ensure the image covers the area without distortion */
+}
+
+/* Container for the experience cards */
+.experience-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns layout */
+  gap: 20px; /* Space between cards */
+  padding: 20px;
+}
+
+/* Title within the experience card */
+.experience-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
   margin-bottom: 10px;
-  line-height: 1.8;
-  font-size: 1.2em; /* Increase font size for better readability */
+}
+
+/* Footer */
+.footer p {
+  padding: 20px;
+  text-align: center;
+  font-size: 1em;
+  margin: 10px 0;
+}
+
+/* Header container styling */
+.header {
+  text-align: center;
+  padding: 20px 0; /* Add spacing above and below the header */
+  margin-bottom: 50px; /* Increased space below the header */
+}
+
+/* Header title styling */
+.header h1 {
+  font-size: 2.5em; /* Larger font size for your name */
+  font-weight: bold;
+  color: #333; /* Dark color for the name */
+  margin: 0;
+}
+
+/* Header paragraph styling */
+.header p {
+  font-size: 1.1em;
+  color: #555; /* Lighter color for the contact details */
+  margin-top: 10px;
+}
+
+/* Link styling */
+.header a {
+  color: #0066cc; /* Set link color */
+  text-decoration: none; /* Remove underline */
+  font-weight: bold;
 }

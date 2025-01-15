@@ -1,9 +1,18 @@
 import React from 'react';
+import Card from './Card'; // Import Card component
+import frontGear from '../styles/front-gear3.jpg'; // Front image for the card
+import backGear from '../styles/back-gear3.jpg'; // Back image for the card
 
 const Certifications = () => {
   return (
-    <section>
-      <h2 className="section-title">Professional Certifications</h2>
+    <section className="cards-container"> {/* Added the cards-container class */}
+      {/* Certifications Card */}
+      <Card
+        title="Professional Certifications"
+        frontImage={frontGear}
+        backImage={backGear}
+        dataAos="zoom-in-right"
+      >
       <ul className="certification-list">
         <li>
           <strong>AWS Certified Solutions Architect - Associate</strong><br />
@@ -16,6 +25,7 @@ const Certifications = () => {
           Focuses on developing and maintaining AWS-based applications, with emphasis on serverless technologies, automation, and cloud-native development practices.
         </li>
       </ul>
+      </Card>
     </section>
   );
 };

@@ -1,40 +1,60 @@
-import React, { useState } from 'react';
-import cardData from '../components/CardData'; // Import the card data
+import React from 'react';
 
+// Array holding data for experiences
+const experiencesData = [
+  {
+    title: "Software Engineer Intern",
+    company: "Tech Company XYZ",
+    dates: "June 2024 - August 2024",
+    responsibilities: [
+      "Worked on the development of new features for the company's flagship product.",
+      "Collaborated with cross-functional teams to design and implement software solutions."
+    ],
+    achievements: [
+      "Successfully improved the performance of key components, resulting in a 20% increase in speed."
+    ]
+  },
+  {
+    title: "Junior Developer",
+    company: "Software Solutions Inc.",
+    dates: "September 2023 - May 2024",
+    responsibilities: [
+      "Developed and maintained internal tools for the engineering team.",
+      "Participated in code reviews and maintained code quality."
+    ],
+    achievements: [
+      "Helped refactor legacy code, which reduced the bug rate by 30%."
+    ]
+  }
+];
+
+// React functional component to render the Experiences section
 const Experience = () => {
-  const [flipped, setFlipped] = useState(false);
-
-  const handleCardClick = () => {
-    setFlipped(!flipped);
-  };
-
   return (
-    <section>
-      <div className={`card ${flipped ? 'flipped' : ''}`} onClick={handleCardClick}>
-        <div className="card-inner">
-          <div className="card-front">
-            <h2 className="section-title">Experience</h2>
-          </div>
-          <div className="card-back">
-            <ul className="experience-list">
-              {cardData.experience.map((exp, index) => (
-                <li key={index} className="outer-card">
-                  <p><strong>{exp.title}</strong>, {exp.company}</p>
-                  <p>{exp.dates}</p>
-                  <ul className="responsibility-list">
-                    {exp.responsibilities.map((resp, idx) => (
-                      <li key={idx}>{resp}</li>
-                    ))}
-                  </ul>
-                  <ul className="achievement-list">
-                    {exp.achievements.map((ach, idx) => (
-                      <li key={idx}>{ach}</li>
-                    ))}
-                  </ul>
-                </li>
-              ))}
-            </ul>
-          </div>
+    <section className="experience-section">
+      <h2>Experience</h2>
+
+      {/* Added containment here for the experience list */}
+      <div className="experience-container">
+        <div className="experience-list">
+          {experiencesData.map((exp, index) => (
+            <div key={index} className="experience-item">
+              <h3>{exp.title}</h3>
+              <p><strong>{exp.company}</strong> | {exp.dates}</p>
+              <h4>Responsibilities:</h4>
+              <ul>
+                {exp.responsibilities.map((resp, idx) => (
+                  <li key={idx}>{resp}</li>
+                ))}
+              </ul>
+              <h4>Achievements:</h4>
+              <ul>
+                {exp.achievements.map((ach, idx) => (
+                  <li key={idx}>{ach}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </div>
     </section>

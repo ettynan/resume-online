@@ -3,7 +3,7 @@ import React from 'react';
 const Header = () => {
   return (
     <header>
-      <div className="center">
+      <div className="header">
         <h1>Erin Tynan</h1>
         <p>
           <a href="https://www.linkedin.com/in/erintynan">LinkedIn</a> | 
@@ -12,7 +12,6 @@ const Header = () => {
           <a href="https://github.com/ettynan">GitHub</a>
         </p>
       </div>
-      <hr className="divider" />
     </header>
   );
 };
