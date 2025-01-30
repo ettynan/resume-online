@@ -5,8 +5,10 @@
   }
   
   .visitor-counter h3 {
-    font-size: 1.5em;
+    margin-top: 5rem; /* Adds space between the title and the section above */
+    font-size: 2em;
     font-weight: bold;
+    font-family: 'Georgia', serif; /* Steampunk-inspired font */
     margin-bottom: 10px;
   }
   

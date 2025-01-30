@@ -25,7 +25,7 @@ const educationData = [
     title: 'Graduate Certificate, Computer Science', // Title of the education
     content: (
       <ul>
-        <li><strong>Northeastern University, Boston, MA & Seattle, WA</strong></li>
+        <li><strong>Northeastern University, Boston, MA</strong></li>
         <li>Food Inspection Report Web App: Built a web app for restaurant inspections.</li>
         <li>Doctor Locating App: Developed a doctor-locating web app.</li>
         <li>SharkHack 2019 Winner: Best Social Good Hack.</li>
@@ -64,7 +64,7 @@ const educationData = [
 // React functional component to render the Education section
 const Education = () => {
   return (
-    <section>
+    <section className="education-section">
       <h2>Education</h2>
 
       {/* Container for education cards */}

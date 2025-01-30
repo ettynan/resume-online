@@ -56,7 +56,7 @@ const projectsData = [
 // React functional component to render the Projects section
 const Projects = () => {
   return (
-    <section>
+    <section className="projects-section">
       {/* Header for the Projects section */}
       <h2>Projects</h2>
       

@@ -21,7 +21,7 @@ body {
   width: 100%;
   max-width: 1200px; /* You can adjust the max-width */
   margin: 0 auto;
-  padding: 20px;
+  justify-content: center; /* Change to flex-start if needed */
 }
 
 .card {
@@ -32,6 +32,7 @@ body {
   margin-bottom: 2in;
   flex-shrink: 0;
   position: relative; /* Ensure position is relative for inner elements */
+  margin-left: -20px; /* Reduce this negative value to shift left */
 }
 
 /* Animations for cards */
@@ -48,17 +49,6 @@ body {
 .card[data-aos='zoom-in-right'] {
   opacity: 1;
   transform: translateY(-20px) translateX(50px) scale(1);
-}
-
-/* Offset each card individually */ 
-.card:nth-child(2) {
-  position: relative;
-  left: 100%; /* Keeps the first card to the left */
-}
-
-.card:nth-child(even) {
-  position: relative;
-  left: 10%; /* Keeps the first card to the left */
 }
 
 /* 3D card flipping effect */
@@ -87,11 +77,13 @@ body {
 
 /* Front of the Card */
 .card .card-front {
+  font-family: 'Georgia', serif; /* Steampunk-inspired font */
   background-color: #f4f4f4;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.5em;
+  font-size: 1.2em;
+  font-weight: bold;
   text-align: center;
   color: #333;
 }
@@ -102,10 +94,10 @@ body {
   left: 50%;
   transform: translateX(-50%);
   color: black;
-  background-color: white;
-  font-size: 2.5rem;
-  letter-spacing: 2px;
   font-weight: bold;
+  background-color: white;
+  font-size: 1.5em;
+  letter-spacing: 2px;
   padding: 10px;
   border-radius: 5px;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
@@ -175,10 +167,11 @@ body {
 
 /* Additional styles for lists and font size */
 ul, ol {
-  padding-left: 0;
+  padding-left: 5px;
 }
 
 li {
+  padding-left: 5px;
   line-height: 1.2;
   font-size: 1em; /* Increase font size for better readability */
 }
@@ -211,17 +204,18 @@ h2 {
 .cards-container2 {
   display: grid; /* Make it a grid */
   grid-template-columns: repeat(2, 1fr); /* Two equal-width columns */
-  gap: 70px; /* Space between cards */
-  padding: 20px; /* Padding around the grid */
+  gap: 60px; /* Space between cards */
+  padding: 10px; /* Padding around the grid */
 }
 
 .cards-container2 .card {
+  padding: 10px; /* Padding around the grid */
   border: 2px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   max-width: 450px; /* Adjust the max width as per your needs */
-  margin: 0 auto; /* Center the card */
+  margin: auto 20px auto; /* Center the card */
 }
 
 .cards-container2 .card:hover {
@@ -252,7 +246,7 @@ h2 {
   display: grid; /* Make it a grid */
   grid-template-columns: repeat(2, 1fr); /* Two equal-width columns */
   gap: 70px; /* Space between cards */
-  padding: 20px; /* Padding around the grid */
+  padding: 10px; /* Padding around the grid */
 }
 
 .education-cards-container .card {
@@ -332,4 +326,95 @@ h2 {
   color: #0066cc; /* Set link color */
   text-decoration: none; /* Remove underline */
   font-weight: bold;
+}
+
+/* Ensure the experience section uses more of the width of the screen */
+.experience-section {
+  max-width: 1200px; /* Limits the maximum width */
+  width: 100%; /* Spans the full container width */
+  margin: 30px auto; /* Center the section */
+  padding-top: 3rem; /* Adds spacing at the top of the section */
+}
+
+/* Modify the experience container for better layout */
+.experience-container {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap */
+  justify-content: space-between; /* Space out items */
+}
+
+/* Ensure each experience item uses more width */
+.experience-item {
+  width: 100%; /* Use 48% to make the items sit next to each other with some spacing */
+  margin-bottom: 2rem; /* Add space between experience items */
+}
+
+/* Style the paragraph tags within the experience section */
+.experience-section p {
+  font-size: 1.2em; /* This controls the font size for paragraph text */
+  line-height: 1.5em; /* Adjust line height for readability */
+  font-weight: normal; /* Normal font weight for paragraphs */
+}
+
+/* Style the list items within the experience section */
+.experience-section li {
+  font-size: 1em; /* Adjust font size for list items */
+  line-height: 1.4em; /* Adjust line height for list items */
+  margin-bottom: 0.9em; /* Add some space between list items */
+}
+
+.education-section h2 {
+  margin-top: -50px; /* Reduce spacing between title and previous section */
+  font-family: 'Georgia', serif; /* Steampunk-inspired font */
+  text-align: center; /* Center the title */
+  margin-bottom: 1.8rem; /* Adds space below the title */
+  font-weight: bold; /* Make it bold */
+}
+
+/* Style the section title (h2) */
+.experience-section h2, 
+.projects-section h2 {
+  font-family: 'Georgia', serif; /* Steampunk-inspired font */
+  text-align: center; /* Center the title */
+  margin-top: 2rem; /* Adds space between the title and the section above */
+  margin-bottom: 1.5rem; /* Adds space below the title */
+  font-weight: bold; /* Make it bold */
+}
+
+/* Style the header of each experience (title, company, and dates) */
+.experience-header {
+  display: flex;
+  justify-content: space-between; /* Space between title and company/date */
+  align-items: center; /* Vertically align items */
+  margin-bottom: 1rem; /* Space below the header */
+}
+
+/* Style for title (h3) */
+.experience-header h3,
+.experience-header p {
+  font-size: 1.5em; /* Set title, company, and date font size to be the same */
+  margin: 0; /* Remove margin from h3 and p */
+  font-weight: bold; /* Make responsibilities bold */
+}
+
+.experience-header p {
+  font-weight: normal; /* Make text weight normal */
+}
+
+/* Style for responsibilities */
+.experience-item h4 {
+  font-size: 1.3em; /* Increase the font size for responsibilities */
+  font-weight: bold; /* Make responsibilities bold */
+  margin-top: 1rem; /* Add space above responsibilities */
+}
+
+/* Style the responsibility list */
+.experience-item ul {
+  font-size: 1.2em; /* Increase font size for the responsibility list */
+  margin-top: 0.5rem; /* Adds a little space above the list */
+}
+
+/* Style the individual list items */
+.experience-item li {
+  margin-bottom: 0.5rem; /* Adds space between list items */
 }
