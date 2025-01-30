@@ -1,5 +1,5 @@
 # Resume Challenge in Progress
-This project is following the steps outlined in [The Cloud Resume Challenge AWS] (https://cloudresumechallenge.dev/docs/the-challenge/aws/)
+This project is following the steps outlined in [The Cloud Resume Challenge AWS](https://cloudresumechallenge.dev/docs/the-challenge/aws/)
 
 
 # Getting Started with Create React App
