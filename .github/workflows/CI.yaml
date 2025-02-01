@@ -23,12 +23,15 @@ jobs:
 
       - name: Install Dependencies
         run: |
+          cd resume-online
           npm install  # Or `yarn install` if you use Yarn
 
       - name: Build Website
         run: |
+          cd resume-online
           npm run build  # Build command for your project (e.g., for React, Vue, etc.)
 
       - name: Run Tests
         run: |
+          cd resume-online
           npm test  # Or any test command for your project
