@@ -1,74 +1,250 @@
-# Resume Challenge in Progress
-This project is following the steps outlined in [The Cloud Resume Challenge AWS](https://cloudresumechallenge.dev/docs/the-challenge/aws/)
+This guide provides detailed steps for deploying a **React-based resume website** on **AWS using Terraform**. It includes prerequisites, setup instructions, and deployment steps.
+
+## **Table of Contents**
+
+[**1️⃣ Prerequisites**](#1️⃣-prerequisites)
+
+[**2️⃣ Setting Up AWS & IAM**](#2️⃣setting-up-aws--iam)
+
+[**3️⃣ Installing Terraform**](#3️⃣-installing-terraform)
+
+[**4️⃣ Preparing the React App**](#4️⃣-preparing-the-react-app)
+
+[**5️⃣ Setting Up S3 for Static Hosting**](#5️⃣-setting-up-s3-for-static-hosting)
+
+[**6️⃣ Using Terraform to Deploy the Website**](#6️⃣-using-terraform-to-deploy-the-website)
+
+[**7️⃣ Setting Up CloudFront for HTTPS**](#7️⃣-setting-up-cloudfront-for-https)
+
+[**8️⃣ Adding a CI/CD Pipeline**](#8️⃣-adding-a-cicd-pipeline)
+
+[**9️⃣ Final Testing & Deployment**](#9️⃣final-testing--deployment)
+
+## **1️⃣ Prerequisites**
+
+Before starting, ensure you have the following:
+
+- [x]  **AWS Account** ([Sign up here](https://aws.amazon.com/))
+- [ ]  **IAM User with Required Permissions** (for Terraform & CLI access)
+- [ ]  **Terraform Installed** (Download Terraform)
+- [ ]  **AWS CLI Installed** ([Download AWS CLI](https://aws.amazon.com/cli/))
+- [ ]  **Node.js Installed** ([Download Node.js](https://nodejs.org/))
+- [x]  **React App Created** (**`npx create-react-app my-aws-app`**)
+
+### **Verify Installations**
+
+Check AWS CLI:
+
+```jsx
+aws --version
+```
+
+Check Terraform:
+
+```jsx
+terraform -version
+```
+
+Check Node.js:
+
+```jsx
+node -v
+npm -v
+```
 
 
-# Getting Started with Create React App
+## **2️⃣ Setting Up AWS & IAM**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1. **Create an IAM User:**
+    - Go to [AWS IAM Console](https://console.aws.amazon.com/iam/home#/users)
+    - Click **Add User** → Enter username (`terraform-user`)
+    - Select **Programmatic Access**
+    - Attach **AdministratorAccess** policy (or create a custom policy for S3, CloudFront, etc.)
+    - Save **Access Key ID** and **Secret Access Key**
+2. **Configure AWS CLI:**
 
-## Available Scripts
+```
+aws configure
+```
 
-In the project directory, you can run:
+Provide:
 
-### `npm start`
+- **Access Key ID**
+- **Secret Access Key**
+- **Default region** (e.g., `us-east-1`)
+- **Output format** (`json`)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Verify access:
+```jsx
+aws s3 ls
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+## **3️⃣ Installing Terraform**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. **Download & Install Terraform** (Official Guide)
+2. **Verify Installation:**
 
-### `npm run build`
+```jsx
+terraform —version
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## **4️⃣ Preparing the React App**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. **Navigate to your project folder:**
 
-### `npm run eject`
+```
+cd my-aws-app
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. **Build the project:**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+npm run build
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+This creates a `build/` directory containing static files.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+## **5️⃣ Setting Up S3 for Static Hosting**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. **Manually Create S3 Bucket**:
+    - [ ]  Go to [AWS S3 Console](https://s3.console.aws.amazon.com/s3/home)
+    - [ ]  Click **Create Bucket**
+    - [ ]  **Enter a unique bucket name** (e.g., `my-resume-site`)
+    - [ ]  Uncheck **Block all public access**
+    - [ ]  Enable **Static Website Hosting** in **Properties**
+    - [ ]  Upload the `build/` files
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+OR
 
-### Code Splitting
+1. **Define the S3 Bucket in Terraform** (See next step)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+## **6️⃣ Using Terraform to Deploy the Website**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### **Project Structure**
 
-### Making a Progressive Web App
+```
+cloud-resume-terraform/
+│── main.tf               # Main Terraform configuration
+│── variables.tf          # Define variables
+│── outputs.tf            # Define outputs
+│── terraform.tfvars      # Store variable values
+│── .gitignore            # Exclude sensitive files
+│
+└── my-react-app/         # React app folder
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### **Initialize Terraform**
 
-### Advanced Configuration
+```
+cd cloud-resume-terraform
+terraform init
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### **Example Terraform Configuration (`main.tf`)**
 
-### Deployment
+```
+provider "aws" {
+  region = "us-east-1"
+}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+resource "aws_s3_bucket" "website" {
+  bucket = "my-resume-site"
+  acl    = "public-read"
+  website {
+    index_document = "index.html"
+    error_document = "index.html"
+  }
+}
 
-### `npm run build` fails to minify
+resource "aws_s3_bucket_policy" "website_policy" {
+  bucket = aws_s3_bucket.website.id
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:GetObject",
+      "Resource": "${aws_s3_bucket.website.arn}/*"
+    }
+  ]
+}
+EOF
+}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### **Deploy with Terraform**
+
+```
+terraform plan
+terraform apply
+```
+
+## **7️⃣ Setting Up CloudFront for HTTPS**
+
+```
+resource "aws_cloudfront_distribution" "cdn" {
+  origin {
+    domain_name = aws_s3_bucket.website.bucket_regional_domain_name
+    origin_id   = "S3-${aws_s3_bucket.website.id}"
+  }
+
+  enabled             = true
+  default_root_object = "index.html"
+  viewer_certificate {
+    cloudfront_default_certificate = true
+}
+```
+
+Apply changes:
+
+```jsx
+terraform apply
+```
+
+
+## **8️⃣ Adding a CI/CD Pipeline**
+
+### **GitHub Actions Example**
+
+Create `.github/workflows/deploy.yml`:
+
+```
+name: Deploy to S3
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        run: npm install
+      - name: Build React app
+        run: npm run build
+      - name: Deploy to S3
+        run: aws s3 sync build/ s3://my-resume-site --delete
+```
+
+
+## **9️⃣ Final Testing & Deployment**
+
+### **Verify Everything is Working**
+
+1. Run `terraform apply` and confirm deployment.
+2. Visit the **CloudFront URL** or **S3 Website URL**.
+3. If needed, update the DNS (e.g., using Route 53 for a custom domain).
+
+### **Destroy Resources (if needed)**
+
+```jsx
+terraform destroy
+```
