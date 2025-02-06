@@ -110,12 +110,12 @@ This creates a `build/` directory containing static files.
 ## **5️⃣ Setting Up S3 for Static Hosting**
 
 1. **Manually Create S3 Bucket**:
-    - [ ]  Go to [AWS S3 Console](https://s3.console.aws.amazon.com/s3/home)
-    - [ ]  Click **Create Bucket**
-    - [ ]  **Enter a unique bucket name** (e.g., `my-resume-site`)
-    - [ ]  Uncheck **Block all public access**
-    - [ ]  Enable **Static Website Hosting** in **Properties**
-    - [ ]  Upload the `build/` files
+    - []  Go to [AWS S3 Console](https://s3.console.aws.amazon.com/s3/home)
+    - []  Click **Create Bucket**
+    - []  **Enter a unique bucket name** (e.g., `my-resume-site`)
+    - []  Uncheck **Block all public access**
+    - []  Enable **Static Website Hosting** in **Properties**
+    - []  Upload the `build/` files
 
 OR
 
