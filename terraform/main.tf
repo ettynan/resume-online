@@ -1,7 +1,17 @@
-provider "aws" {
-  region = var.region  # Change if needed
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = ">= 3.50" # Ensure this version or higher
+    }
+  }
 }
 
+provider "aws" {
+  region = var.region
+}
+
+# S3 Bucket for Resume Website
 resource "aws_s3_bucket" "resume_site" {
   bucket = var.bucket_name
 
@@ -10,7 +20,7 @@ resource "aws_s3_bucket" "resume_site" {
   }
 }
 
-# Enable static website hosting
+# Enable Static Website Hosting (CloudFront Will Use This)
 resource "aws_s3_bucket_website_configuration" "website_config" {
   bucket = var.bucket_name
 
@@ -23,31 +33,57 @@ resource "aws_s3_bucket_website_configuration" "website_config" {
   }
 }
 
-# Make the S3 bucket publicly readable (Optional: Change for security)
+# Restrict Public Access (CloudFront Will Control Access)
 resource "aws_s3_bucket_public_access_block" "public_access" {
   bucket = var.bucket_name
 
   block_public_acls       = true
-  block_public_policy     = false
+  block_public_policy     = true
   ignore_public_acls      = true
   restrict_public_buckets = true
 }
 
-# S3 Bucket Policy to Allow Public Read (Optional)
-resource "aws_s3_bucket_policy" "public_read_policy" {
-  bucket = var.bucket_name
-  policy = <<EOT
+# S3 Bucket Policy to Allow CloudFront to Access Files Securely
+resource "aws_s3_bucket_policy" "cloudfront_policy" {
+  bucket     = var.bucket_name
+  policy     = <<EOT
 {
   "Version": "2012-10-17",
   "Statement": [
     {
       "Effect": "Allow",
-      "Principal": "*",
+      "Principal": {
+        "Service": "cloudfront.amazonaws.com"
+      },
       "Action": "s3:GetObject",
-      "Resource": "arn:aws:s3:::${var.bucket_name}/*"
+      "Resource": "arn:aws:s3:::${var.bucket_name}/*",
+      "Condition": {
+        "StringEquals": {
+          "AWS:SourceArn": "${aws_cloudfront_distribution.resume_distribution.arn}"
+        }
+      }
     }
   ]
 }
 EOT
-depends_on = [aws_s3_bucket.resume_site]  # Ensure this runs after the bucket is created
+  depends_on = [aws_s3_bucket.resume_site]
+}
+
+# CloudFront Distribution (HTTPS)
+output "cloudfront_domain_name" {
+  description = "CloudFront domain name"
+  value       = aws_cloudfront_distribution.resume_distribution.domain_name
+}
+
+# Route 53 DNS Record (Alias to CloudFront)
+resource "aws_route53_record" "resume_dns" {
+  zone_id = var.hosted_zone_id
+  name    = var.domain_name
+  type    = "A"
+
+  alias {
+    name                   = aws_cloudfront_distribution.resume_distribution.domain_name
+    zone_id                = aws_cloudfront_distribution.resume_distribution.hosted_zone_id
+    evaluate_target_health = false
+  }
 }
