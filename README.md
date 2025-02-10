@@ -130,7 +130,6 @@ OR
 cloud-resume-terraform/
 │── main.tf               # Main Terraform configuration
 │── variables.tf          # Define variables
-│── outputs.tf            # Define outputs
 │── terraform.tfvars      # Store variable values
 │── .gitignore            # Exclude sensitive files
 │
