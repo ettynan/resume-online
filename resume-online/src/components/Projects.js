@@ -16,8 +16,8 @@ const projectsData = [
       <ul>
         {/* List of details describing the project */}
         <li>Built responsive resume webpage with React, HTML, & CSS, with plans for AWS hosting.</li>
-        <li>Progressing toward cloud hosting using AWS services, including S3 and DynamoDB for
-        visitor tracking, while integrating CI/CD for automated deployment.</li>
+        <li>Cloud hosted using AWS services via Terraform, including S3, CloudFront, and Route53. </li>
+        <li>Progressing toward DynamoDB for visitor tracking, while integrating CI/CD for automated deployment.</li>
       </ul>
     ),
     frontImage: frontGear1, // Add the front image here
