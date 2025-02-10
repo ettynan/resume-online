@@ -50,3 +50,17 @@ variable "cloudfront_distribution_arn" {
   type        = string
 }
 
+variable "target_origin_id" {
+  description = "The target origin ID for the cache behavior."
+  type        = string
+}
+
+variable "cache_policy_id" {
+  description = "The ID of the cache policy."
+  type        = string
+}
+
+variable "origin_request_policy_id" {
+  description = "The ID of the origin request policy."
+  type        = string
+}

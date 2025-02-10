@@ -20,19 +20,6 @@ resource "aws_s3_bucket" "resume_site" {
   }
 }
 
-# Enable Static Website Hosting (CloudFront Will Use This)
-resource "aws_s3_bucket_website_configuration" "website_config" {
-  bucket = var.bucket_name
-
-  index_document {
-    suffix = "index.html"
-  }
-
-  error_document {
-    key = "error.html"
-  }
-}
-
 # Restrict Public Access (CloudFront Will Control Access)
 resource "aws_s3_bucket_public_access_block" "public_access" {
   bucket = var.bucket_name
@@ -48,9 +35,11 @@ resource "aws_s3_bucket_policy" "cloudfront_policy" {
   bucket     = var.bucket_name
   policy     = <<EOT
 {
-  "Version": "2012-10-17",
+  "Version": "2008-10-17",
+  "Id": "PolicyForCloudFrontPrivateContent",
   "Statement": [
     {
+      "Sid": "AllowCloudFrontServicePrincipal",
       "Effect": "Allow",
       "Principal": {
         "Service": "cloudfront.amazonaws.com"
