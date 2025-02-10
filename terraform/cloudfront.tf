@@ -1,5 +1,6 @@
 resource "aws_cloudfront_origin_access_control" "oac" {
-  name                              = "S3-OAC"
+  name                              = "resume-site-et-oac"
+  description                       = "OAC for resume site"
   origin_access_control_origin_type = "s3"
   signing_behavior                  = "always"
   signing_protocol                  = "sigv4"
@@ -8,7 +9,7 @@ resource "aws_cloudfront_origin_access_control" "oac" {
 resource "aws_cloudfront_distribution" "resume_distribution" {
   origin {
     domain_name              = aws_s3_bucket.resume_site.bucket_regional_domain_name
-    origin_id                = "S3Origin"
+    origin_id                = var.target_origin_id
     origin_access_control_id = aws_cloudfront_origin_access_control.oac.id
   }
 
@@ -27,18 +28,15 @@ resource "aws_cloudfront_distribution" "resume_distribution" {
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]
     cached_methods   = ["GET", "HEAD"]
-    target_origin_id = "S3Origin"
+    target_origin_id = var.target_origin_id
+    cache_policy_id            = var.cache_policy_id
+    origin_request_policy_id   = var.origin_request_policy_id
 
     viewer_protocol_policy = "redirect-to-https"
     
-    # Add forwarded_values here
-    forwarded_values {
-      query_string = false
-      cookies {
-        forward = "none"
-      }
-      headers = ["Host"]
-    }
+
+  # Explicitly set compression to true
+  compress = true
   }
 
   restrictions {
@@ -46,4 +44,7 @@ resource "aws_cloudfront_distribution" "resume_distribution" {
       restriction_type = "none"
     }
   }
+
+  price_class = var.cloudfront_price_class
+  is_ipv6_enabled = true
 }
