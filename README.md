@@ -10,7 +10,7 @@ This guide provides detailed steps for deploying a **React-based resume website*
 
 [**4️⃣ Preparing the React App**](#4️⃣-preparing-the-react-app)
 
-[**5️⃣ Setting Up S3 for Static Hosting**](#5️⃣-setting-up-s3-for-static-hosting)
+[**5️⃣ Setting Up S3 for CloudFront**](#5️⃣-setting-up-s3-for-cloudfront)
 
 [**6️⃣ Using Terraform to Deploy the Website**](#6️⃣-using-terraform-to-deploy-the-website)
 
@@ -25,10 +25,10 @@ This guide provides detailed steps for deploying a **React-based resume website*
 Before starting, ensure you have the following:
 
 - [x]  **AWS Account** ([Sign up here](https://aws.amazon.com/))
-- [ ]  **IAM User with Required Permissions** (for Terraform & CLI access)
-- [ ]  **Terraform Installed** (Download Terraform)
-- [ ]  **AWS CLI Installed** ([Download AWS CLI](https://aws.amazon.com/cli/))
-- [ ]  **Node.js Installed** ([Download Node.js](https://nodejs.org/))
+- [x]  **IAM User with Required Permissions** (for Terraform & CLI access)
+- [x]  **Terraform Installed** (Download Terraform)
+- [x]  **AWS CLI Installed** ([Download AWS CLI](https://aws.amazon.com/cli/))
+- [x]  **Node.js Installed** ([Download Node.js](https://nodejs.org/))
 - [x]  **React App Created** (**`npx create-react-app my-aws-app`**)
 
 ### **Verify Installations**
@@ -107,15 +107,15 @@ npm run build
 This creates a `build/` directory containing static files.
 
 
-## **5️⃣ Setting Up S3 for Static Hosting**
+## **5️⃣ Setting Up S3 for CloudFront**
 
 1. **Manually Create S3 Bucket**:
-    - []  Go to [AWS S3 Console](https://s3.console.aws.amazon.com/s3/home)
-    - []  Click **Create Bucket**
-    - []  **Enter a unique bucket name** (e.g., `my-resume-site`)
-    - []  Uncheck **Block all public access**
-    - []  Enable **Static Website Hosting** in **Properties**
-    - []  Upload the `build/` files
+    - [X]  Go to [AWS S3 Console](https://s3.console.aws.amazon.com/s3/home)
+    - [X]  Click **Create Bucket**
+    - [X]  **Enter a unique bucket name** (e.g., `my-resume-site`)
+    - [X]  Uncheck **Block all public access**
+    - [X]  Disable **Static Website Hosting** in **Properties**
+    - [X]  Upload the `build/` files
 
 OR
 
