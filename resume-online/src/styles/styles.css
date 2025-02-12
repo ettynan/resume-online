@@ -121,6 +121,13 @@ body {
 
 /* Back of the Card */
 .card .card-back {
+  overflow-y: scroll; /* Enable vertical scrolling */
+  max-height: 100%; /* Ensure it doesn’t exceed the card’s height */
+  padding: 10px;
+  scrollbar-width: thin; /* Makes scrollbar visible but small (for Firefox) */
+  scrollbar-color: white black; /* Custom scrollbar colors */
+  /* Make the scrollbar always visible on WebKit browsers (Chrome, Safari, etc.) */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
   transform: rotateY(180deg);
   background-color: white;
   text-align: left;
@@ -133,6 +140,30 @@ body {
   align-items: center; /* Centering the box */
   font-family: 'Georgia', serif; /* Steampunk-inspired font */
 }
+
+/* WebKit-based browsers (Chrome, Safari, Edge) */
+.card-back::-webkit-scrollbar {
+  width: 8px; /* Keeps scrollbar visible */
+  background: black; /* Black track */
+}
+
+.card-back::-webkit-scrollbar-thumb {
+  background-color: white; /* White handle */
+  border-radius: 4px;
+  min-height: 20px; /* Ensures a visible scrollbar handle */
+}
+
+/* Prevent any fade effect that makes the scrollbar disappear on scroll */
+.card-back::-webkit-scrollbar {
+  visibility: visible; /* Always visible, even when not scrolling */
+}
+
+
+/* Always display the scrollbar even when not actively scrolling */
+.card-back::-webkit-scrollbar {
+  display: block; /* Ensure the scrollbar is always displayed */
+}
+
 
 /* Add extra left padding to the text content itself */
 .card .card-back .content-box p,
