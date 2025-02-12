@@ -303,22 +303,6 @@ h2 {
   object-fit: cover; /* Ensure the image covers the area without distortion */
 }
 
-/* Container for the experience cards */
-.experience-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Two columns layout */
-  gap: 20px; /* Space between cards */
-  padding: 20px;
-}
-
-/* Title within the experience card */
-.experience-title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 10px;
-}
-
 /* Footer */
 .footer p {
   padding: 20px;
@@ -412,6 +396,7 @@ h2 {
 /* Style the header of each experience (title, company, and dates) */
 .experience-header {
   display: flex;
+  flex-wrap: wrap; /* Allows wrapping when needed */
   justify-content: space-between; /* Space between title and company/date */
   align-items: center; /* Vertically align items */
   margin-bottom: 1rem; /* Space below the header */
@@ -421,8 +406,10 @@ h2 {
 .experience-header h3,
 .experience-header p {
   font-size: 1.5em; /* Set title, company, and date font size to be the same */
+  flex: 1; /* Allows flexible width */
   margin: 0; /* Remove margin from h3 and p */
   font-weight: bold; /* Make responsibilities bold */
+  min-width: 150px;
 }
 
 .experience-header p {
@@ -445,4 +432,16 @@ h2 {
 /* Style the individual list items */
 .experience-item li {
   margin-bottom: 0.5rem; /* Adds space between list items */
+}
+
+/* Media query for small screens */
+@media (max-width: 600px) {
+  .experience-header {
+    flex-direction: column; /* Stacks title, company, and dates vertically */
+    align-items: flex-start; /* Aligns text to the left */
+  }
+
+  .experience-header p {
+    text-align: left; /* Ensures alignment remains natural */
+  }
 }
