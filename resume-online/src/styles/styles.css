@@ -35,6 +35,22 @@ body {
   margin-left: -20px; /* Reduce this negative value to shift left */
 }
 
+/* Shrink for tablets */
+@media (max-width: 768px) {
+  .card {
+    width: 80%;  /* Scale down */
+    height: 35vh;
+  }
+}
+
+/* Shrink more for phones */
+@media (max-width: 480px) {
+  .card {
+    width: 90%;
+    height: 30vh;
+  }
+}
+
 /* Animations for cards */
 .card[data-aos='zoom-in'] {
   opacity: 1;
@@ -203,9 +219,15 @@ h2 {
 
 .cards-container2 {
   display: grid; /* Make it a grid */
-  grid-template-columns: repeat(2, 1fr); /* Two equal-width columns */
+  grid-template-columns: repeat(2, 1fr); /* Default: Two equal-width columns */
   gap: 60px; /* Space between cards */
   padding: 10px; /* Padding around the grid */
+}
+
+@media (max-width: 50em) {
+  .cards-container2 {
+    grid-template-columns: 1fr; /* Single column layout */
+  }
 }
 
 .cards-container2 .card {
@@ -244,9 +266,15 @@ h2 {
 
 .education-cards-container {
   display: grid; /* Make it a grid */
-  grid-template-columns: repeat(2, 1fr); /* Two equal-width columns */
+  grid-template-columns: repeat(2, 1fr); /* Default: Two equal-width columns */
   gap: 70px; /* Space between cards */
   padding: 10px; /* Padding around the grid */
+}
+
+@media (max-width: 50em) {
+  .education-cards-container  {
+    grid-template-columns: 1fr; /* Single column layout */
+  }
 }
 
 .education-cards-container .card {
